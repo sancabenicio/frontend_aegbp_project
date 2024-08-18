@@ -44,6 +44,7 @@ const AppWithNavigate = () => {
 
   return (
     <Routes>
+      {/* Page wrapper ensures Header and Footer are included */}
       <Route path="/:lang/" element={<Page><Home /></Page>} />
       <Route path="/:lang/sobre" element={<Page><Sobre /></Page>} />
       <Route path="/:lang/galeria-fotos" element={<Page><GaleriaFotos /></Page>} />

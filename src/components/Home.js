@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next'; // Importando o hook useTranslation
-import Header from './Header';
-import Footer from './Footer';
 import Sobre from './Sobre';
 import Blog from './Blog';
 import Calendario from './Calendario';
@@ -17,7 +15,6 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
       <div
         className="container-fluid"
         style={{
@@ -67,8 +64,6 @@ const Home = () => {
       <Depoimentos />
       <Divider />
       <Contatos />
-
-      <Footer />
 
       {/* Inclui o CookieBanner */}
       <CookieBanner />
