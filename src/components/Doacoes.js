@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 import { Container, Form, Button, Spinner, Alert, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import Footer from './Footer'; 
 import { useTranslation } from 'react-i18next';
 
 const Doacoes = () => {
@@ -117,7 +115,6 @@ const Doacoes = () => {
 
   return (
     <div>
-      <Header />
       <Container className="py-5">
         <h1 style={{ fontWeight: 'bold', fontSize: '3rem', color: '#FFD700', textAlign: 'center', marginBottom: '2rem' }}>
           {t('donations.title')}
@@ -199,7 +196,6 @@ const Doacoes = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 };

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from './Header';
 import { Container, Form, Button, Card, Alert, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import Footer from './Footer'; 
 import './BlogPost.css';
 
 const BlogPost = () => {
@@ -130,7 +128,6 @@ const BlogPost = () => {
 
   return (
     <div>
-      <Header />
       <Container className="py-5 blog-post-container">
         <Card className="shadow-sm">
           <Card.Img variant="top" src={post.image} alt={post.title} className="blog-post-image" />
@@ -201,7 +198,6 @@ const BlogPost = () => {
           </Button>
         </Form>
       </Container>
-      <Footer />
     </div>
   );
 }

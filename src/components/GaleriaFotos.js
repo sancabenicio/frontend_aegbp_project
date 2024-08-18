@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 import Galeria from './Galeria';
 import axios from 'axios';
-import Footer from './Footer';
 import { useTranslation } from 'react-i18next'; // Importando o hook useTranslation
 
 const GaleriaFotos = () => {
@@ -43,12 +41,10 @@ const GaleriaFotos = () => {
 
   return (
     <div>
-      <Header />
       <div className="text-center my-5">
         <h1 style={{ fontWeight: 'bold', color: '#006400' }}>{t('galleryFotos.title')}</h1> {/* Usando tradução para "Galeria de Fotos" */}
       </div>
       <Galeria items={fotos} type="photo" />
-      <Footer />
     </div>
   );
 };

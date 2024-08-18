@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 import { Container, Spinner, Alert } from 'react-bootstrap';
 import axios from 'axios';
-import Footer from './Footer'; 
 import { useTranslation } from 'react-i18next'; // Importando o hook useTranslation
 
 const Faq = () => {
@@ -52,7 +50,6 @@ const Faq = () => {
 
   return (
     <div>
-      <Header />
       <Container className="py-5">
         <h1 style={{ fontWeight: 'bold', fontSize: '3rem', color: '#FFD700', textAlign: 'center' }}>
           {t('faq.title')} {/* Usando tradução para "Perguntas Frequentes" */}
@@ -73,7 +70,6 @@ const Faq = () => {
           ))}
         </ul>
       </Container>
-      <Footer />
     </div>
   );
 };

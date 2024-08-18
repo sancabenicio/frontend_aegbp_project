@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Alert, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
-import Header from './Header';
-import Footer from './Footer';
 import { useTranslation } from 'react-i18next';
 
 const RegisterMember = () => {
@@ -190,7 +188,6 @@ const RegisterMember = () => {
 
   return (
     <div>
-      <Header />
       <Container className="py-5">
         <h1 className="text-center" style={{ fontWeight: 'bold', fontSize: '3rem', color: '#FFD700' }}>
           {t('registerMember.title')}
@@ -501,7 +498,6 @@ const RegisterMember = () => {
           </Button>
         </Form>
       </Container>
-      <Footer />
     </div>
   );
 };
