@@ -44,7 +44,7 @@ const Header = () => {
         <LinkContainer to={`/${i18n.language}/`}>
           <Navbar.Brand>
             <img
-              src="/images/logo_AEGBP.png"
+              src={`${process.env.PUBLIC_URL}/images/logo_AEGBP.png`}
               alt="AEGB-Porto"
               width="40"
               height="40"
