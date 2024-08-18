@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './components/Home';
 import Sobre from './components/Sobre';
 import GaleriaFotos from './components/GaleriaFotos';
@@ -18,24 +18,27 @@ import BlogPost from './components/BlogPost';
 import RegisterMember from './components/RegisterMember';
 import Page from './components/Page';
 import './i18n';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'; // Importação do hook de tradução
 
 const AppWithNavigate = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation(); // Hook de tradução para poder alterar o idioma
 
   useEffect(() => {
     const path = window.location.pathname;
-    const match = path.match(/^\/[a-z]{2}\//);
+    const match = path.match(/^\/[a-z]{2}\//); // Verifica se a URL já contém o prefixo de idioma
 
     if (!match) {
-      const browserLanguage = navigator.language.split('-')[0];
-      const supportedLanguages = ['pt', 'en'];
-      const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : 'pt';
+      // Detecta o idioma do navegador
+      const browserLanguage = navigator.language.split('-')[0]; // Extrai o idioma, ex: 'pt' de 'pt-BR'
+      const supportedLanguages = ['pt', 'en']; // Lista dos idiomas suportados
+      const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : 'pt'; // Usa o idioma do navegador ou 'pt' como fallback
 
+      // Define o idioma no i18n e redireciona para a URL com o prefixo de idioma correto
       i18n.changeLanguage(defaultLanguage);
       navigate(`/${defaultLanguage}${path}`, { replace: true });
     } else {
+      // Se o prefixo de idioma estiver presente na URL, sincroniza com o i18n
       const currentLanguageInURL = match[1];
       if (i18n.language !== currentLanguageInURL) {
         i18n.changeLanguage(currentLanguageInURL);
@@ -45,6 +48,7 @@ const AppWithNavigate = () => {
 
   return (
     <Routes>
+      {/* Definindo uma rota base para o idioma */}
       <Route path="/:lang/" element={<Home />} />
       <Route path="/:lang/sobre" element={<Page><Sobre /></Page>} />
       <Route path="/:lang/galeria-fotos" element={<GaleriaFotos />} />
