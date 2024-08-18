@@ -17,28 +17,27 @@ import Contatos from './components/Contatos';
 import BlogPost from './components/BlogPost';
 import RegisterMember from './components/RegisterMember';
 import Page from './components/Page';
-import './i18n';
-import { useTranslation } from 'react-i18next'; // Importação do hook de tradução
+import Header from './components/Header'; // Importando o Header
+import './App.css'; // Importando o arquivo CSS para estilização
+import './i18n'; // Configurações do i18next para tradução
+import { useTranslation } from 'react-i18next'; // Hook do i18next
 
 const AppWithNavigate = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation(); // Hook de tradução para poder alterar o idioma
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const path = window.location.pathname;
-    const match = path.match(/^\/[a-z]{2}\//); // Verifica se a URL já contém o prefixo de idioma
+    const match = path.match(/^\/[a-z]{2}\//);
 
     if (!match) {
-      // Detecta o idioma do navegador
-      const browserLanguage = navigator.language.split('-')[0]; // Extrai o idioma, ex: 'pt' de 'pt-BR'
-      const supportedLanguages = ['pt', 'en']; // Lista dos idiomas suportados
-      const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : 'pt'; // Usa o idioma do navegador ou 'pt' como fallback
+      const browserLanguage = navigator.language.split('-')[0];
+      const supportedLanguages = ['pt', 'en'];
+      const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : 'pt';
 
-      // Define o idioma no i18n e redireciona para a URL com o prefixo de idioma correto
       i18n.changeLanguage(defaultLanguage);
       navigate(`/${defaultLanguage}${path}`, { replace: true });
     } else {
-      // Se o prefixo de idioma estiver presente na URL, sincroniza com o i18n
       const currentLanguageInURL = match[1];
       if (i18n.language !== currentLanguageInURL) {
         i18n.changeLanguage(currentLanguageInURL);
@@ -47,25 +46,27 @@ const AppWithNavigate = () => {
   }, [i18n, navigate]);
 
   return (
-    <Routes>
-      {/* Definindo uma rota base para o idioma */}
-      <Route path="/:lang/" element={<Home />} />
-      <Route path="/:lang/sobre" element={<Page><Sobre /></Page>} />
-      <Route path="/:lang/galeria-fotos" element={<GaleriaFotos />} />
-      <Route path="/:lang/galeria-videos" element={<GaleriaVideos />} />
-      <Route path="/:lang/calendario" element={<Page><Calendario /></Page>} />
-      <Route path="/:lang/documentos" element={<Documentos />} />
-      <Route path="/:lang/blog" element={<Page><Blog /></Page>} />
-      <Route path="/:lang/blog/:id" element={<BlogPost />} />
-      <Route path="/:lang/depoimentos" element={<Page><Depoimentos /></Page>} />
-      <Route path="/:lang/faq" element={<Faq />} />
-      <Route path="/:lang/voluntariado" element={<Voluntariado />} />
-      <Route path="/:lang/projetos" element={<Projetos />} />
-      <Route path="/:lang/doacoes" element={<Doacoes />} />
-      <Route path="/:lang/patrocinadores" element={<Patrocinadores />} />
-      <Route path="/:lang/contatos" element={<Page><Contatos /></Page>} />
-      <Route path="/:lang/membros" element={<RegisterMember />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/:lang/" element={<Home />} />
+        <Route path="/:lang/sobre" element={<Page><Sobre /></Page>} />
+        <Route path="/:lang/galeria-fotos" element={<GaleriaFotos />} />
+        <Route path="/:lang/galeria-videos" element={<GaleriaVideos />} />
+        <Route path="/:lang/calendario" element={<Page><Calendario /></Page>} />
+        <Route path="/:lang/documentos" element={<Documentos />} />
+        <Route path="/:lang/blog" element={<Page><Blog /></Page>} />
+        <Route path="/:lang/blog/:id" element={<BlogPost />} />
+        <Route path="/:lang/depoimentos" element={<Page><Depoimentos /></Page>} />
+        <Route path="/:lang/faq" element={<Faq />} />
+        <Route path="/:lang/voluntariado" element={<Voluntariado />} />
+        <Route path="/:lang/projetos" element={<Projetos />} />
+        <Route path="/:lang/doacoes" element={<Doacoes />} />
+        <Route path="/:lang/patrocinadores" element={<Patrocinadores />} />
+        <Route path="/:lang/contatos" element={<Page><Contatos /></Page>} />
+        <Route path="/:lang/membros" element={<RegisterMember />} />
+      </Routes>
+    </>
   );
 };
 
