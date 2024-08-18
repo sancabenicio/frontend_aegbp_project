@@ -38,7 +38,7 @@ const BlogPost = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/blogposts/${id}/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/blogposts/${id}/`;
 
     axios.get(apiUrl)
       .then(response => {
@@ -56,7 +56,7 @@ const BlogPost = () => {
         setLoading(false);
       });
 
-    const commentsUrl = `http://localhost:8000/${languagePrefix}/api/comments/?post=${id}`;
+    const commentsUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/comments/?post=${id}`;
     axios.get(commentsUrl)
       .then(response => {
         setComments(response.data);
@@ -90,7 +90,7 @@ const BlogPost = () => {
 
     const csrfToken = getCSRFToken();
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/comments/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/comments/`;
 
     axios.post(apiUrl, {
       post: id,

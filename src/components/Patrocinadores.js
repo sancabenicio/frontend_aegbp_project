@@ -20,7 +20,7 @@ const Patrocinadores = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/sponsors/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/sponsors/`;
 
     axios.get(apiUrl)
       .then(response => {

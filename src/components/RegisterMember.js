@@ -42,7 +42,7 @@ const RegisterMember = () => {
     const fetchExistingMembers = async () => {
       try {
         const languagePrefix = getLanguagePrefix();
-        const apiUrl = `http://localhost:8000/${languagePrefix}/api/members/`;
+        const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/members/`;
         const response = await axios.get(apiUrl);
         const emails = response.data.map(member => member.email);
         const documentNumbers = response.data.map(member => member.document_number);
@@ -113,7 +113,7 @@ const RegisterMember = () => {
   const sendConfirmationEmail = async (email) => {
     try {
       const languagePrefix = getLanguagePrefix();
-      const emailUrl = `http://localhost:8000/${languagePrefix}/api/send-email/`;
+      const emailUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/send-email/`;
 
       const message = t('registerMember.confirmationEmailMessage');
 
@@ -135,7 +135,7 @@ const RegisterMember = () => {
     }
 
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/members/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/members/`;
 
     const dataToSubmit = { ...formData };
 

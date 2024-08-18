@@ -19,7 +19,7 @@ const Faq = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/faqs/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/faqs/`;
 
     axios.get(apiUrl)
       .then(response => {

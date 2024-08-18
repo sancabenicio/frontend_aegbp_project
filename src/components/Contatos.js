@@ -24,7 +24,7 @@ const Contatos = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/contact-info/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/contact-info/`;
 
     axios.get(apiUrl)
       .then(response => {
@@ -90,7 +90,7 @@ const Contatos = () => {
     setStatus({ loading: true, success: null, error: null });
 
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/contact-messages/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/contact-messages/`;
 
     axios.post(apiUrl, formData)
       .then(response => {

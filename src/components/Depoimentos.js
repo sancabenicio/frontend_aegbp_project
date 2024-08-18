@@ -17,7 +17,7 @@ const Depoimentos = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/testimonials/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/testimonials/`;
 
     axios.get(apiUrl)
       .then(response => {

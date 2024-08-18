@@ -24,7 +24,7 @@ const Voluntariado = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/volunteer-opportunities/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/volunteer-opportunities/`;
 
     axios.get(apiUrl)
       .then(response => {
@@ -65,7 +65,7 @@ const Voluntariado = () => {
     }
 
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/volunteers/?opportunity=${opportunityId}`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/volunteers/?opportunity=${opportunityId}`;
 
     axios.get(apiUrl)
       .then(response => {

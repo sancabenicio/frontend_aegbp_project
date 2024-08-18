@@ -19,7 +19,7 @@ const GaleriaFotos = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/photos/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/photos/`;
 
     axios.get(apiUrl)
       .then(response => {

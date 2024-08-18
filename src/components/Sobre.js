@@ -11,7 +11,7 @@ const Sobre = ({ showFooter = true }) => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/about/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/about/`;
 
     axios.get(apiUrl)
       .then(response => {

@@ -20,7 +20,7 @@ const Projetos = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/projects/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/projects/`;
 
     axios.get(apiUrl)
       .then(response => {

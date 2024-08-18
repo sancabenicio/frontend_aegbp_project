@@ -11,19 +11,15 @@ const Header = () => {
 
   useEffect(() => {
     const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})\//); // Verifica se há prefixo de idioma na URL
+    const match = path.match(/^\/([a-z]{2})\//);
 
     if (!match) {
-      // Detecta o idioma do navegador
-      const browserLanguage = navigator.language.split('-')[0]; // Extrai o idioma principal (ex: 'pt' de 'pt-BR')
-      const supportedLanguages = ['pt', 'en']; // Defina os idiomas suportados
-      const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : 'pt'; // Se não for suportado, use português
-
-      // Define o idioma no i18n e redireciona para a URL com o prefixo de idioma correto
+      const browserLanguage = navigator.language.split('-')[0];
+      const supportedLanguages = ['pt', 'en'];
+      const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : 'pt';
       i18n.changeLanguage(defaultLanguage);
       navigate(`/${defaultLanguage}${path}`, { replace: true });
     } else {
-      // Se o prefixo de idioma estiver presente na URL, sincroniza com o i18n
       const currentLanguageInURL = match[1];
       if (i18n.language !== currentLanguageInURL) {
         i18n.changeLanguage(currentLanguageInURL);
@@ -31,11 +27,10 @@ const Header = () => {
     }
   }, [i18n, navigate]);
 
-  // Função para alterar o idioma manualmente e redirecionar para a nova rota com o prefixo de idioma
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    const pathWithoutLang = window.location.pathname.replace(/^\/[a-z]{2}\//, '/'); // Remove o prefixo do idioma atual da URL
-    navigate(`/${lng}${pathWithoutLang}`, { replace: true });  // Redireciona para o novo idioma mantendo a mesma rota
+    const pathWithoutLang = window.location.pathname.replace(/^\/[a-z]{2}\//, '/');
+    navigate(`/${lng}${pathWithoutLang}`, { replace: true });
   };
 
   return (
@@ -111,7 +106,6 @@ const Header = () => {
               <Nav.Link style={{ marginRight: '10px' }}>{t('header.contacts', 'Contatos')}</Nav.Link>
             </LinkContainer>
 
-            {/* Troca de idioma */}
             <NavDropdown title={i18n.language.toUpperCase()} id="language-dropdown">
               <NavDropdown.Item onClick={() => changeLanguage('pt')}>PT</NavDropdown.Item>
               <NavDropdown.Item onClick={() => changeLanguage('en')}>EN</NavDropdown.Item>

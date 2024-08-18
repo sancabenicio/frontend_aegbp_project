@@ -19,7 +19,7 @@ const Documentos = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/documents/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/documents/`;
 
     axios.get(apiUrl)
       .then(response => {

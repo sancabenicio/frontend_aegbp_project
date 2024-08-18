@@ -21,7 +21,7 @@ const Doacoes = () => {
 
   useEffect(() => {
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/general-settings/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/general-settings/`;
 
     axios.get(apiUrl)
       .then(response => {
@@ -86,7 +86,7 @@ const Doacoes = () => {
     setSuccess(null);
 
     const languagePrefix = getLanguagePrefix();
-    const apiUrl = `http://localhost:8000/${languagePrefix}/api/donations/`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/${languagePrefix}/api/donations/`;
 
     const donationData = new FormData();
     donationData.append('name', formData.name);

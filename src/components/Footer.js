@@ -15,7 +15,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchPrivacyPolicy = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/pt/api/Privacy/');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/pt/api/Privacy/`);
         if (response.data && response.data.length > 0) {
           setPrivacyPolicy(response.data[0].content);
         }
@@ -26,7 +26,7 @@ const Footer = () => {
 
     const fetchSocialLinks = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/pt/api/Social/');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/pt/api/Social/`);
         setSocialLinks(response.data);
       } catch (error) {
         console.error(t('footer.errorFetchingSocialLinks'), error); // Usando tradução para mensagens de erro
