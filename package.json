@@ -2,7 +2,7 @@
   "name": "frontend_aegbp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sancabenicio.github.io/frontend_aegbp_project",
+  "homepage": "https://sancabenicio.github.io/frontend_aegbp",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
