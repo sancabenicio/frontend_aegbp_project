@@ -50,36 +50,34 @@ const Galeria = ({ items, type }) => {
 
   const extractVideoDetails = useCallback((item) => {
     const { video_url, link } = item;
-    let embedUrl, thumbnailUrl;
-
-    if (video_url) {
-      embedUrl = video_url; // Cloudinary video URL
-      thumbnailUrl = null;
-    } else if (link && (link.includes('youtube.com') || link.includes('youtu.be'))) {
-      // Convert YouTube URL to embed format
+    let embedUrl = video_url || link; // Usa video_url se disponível, caso contrário, usa link
+    let thumbnailUrl = null;
+  
+    if (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be')) {
+      // Se for um vídeo do YouTube
       const youtubeRegex = /(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-      const matches = link.match(youtubeRegex);
+      const matches = embedUrl.match(youtubeRegex);
       const videoId = matches ? matches[1] : null;
-      embedUrl = `https://www.youtube.com/embed/${videoId}`; // Use the embed URL
-      thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    } else if (link && link.includes('vimeo.com')) {
-      // Handle Vimeo embed
+      embedUrl = `https://www.youtube.com/embed/${videoId}`; // Gera a URL de embed do YouTube
+      thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; // Gera a URL do thumbnail
+    } else if (embedUrl.includes('vimeo.com')) {
+      // Se for um vídeo do Vimeo
       const vimeoRegex = /vimeo\.com\/(\d+)/;
-      const matches = link.match(vimeoRegex);
+      const matches = embedUrl.match(vimeoRegex);
       const videoId = matches ? matches[1] : null;
-      embedUrl = `https://player.vimeo.com/video/${videoId}`;
-      thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`;
-    } else if (link && link.match(/\.(mp4|webm|ogg)$/)) {
-      // Handle direct video links
-      embedUrl = link;
-      thumbnailUrl = null;
+      embedUrl = `https://player.vimeo.com/video/${videoId}`; // Gera a URL de embed do Vimeo
+      thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`; // Gera a URL do thumbnail
+    } else if (embedUrl.match(/\.(mp4|webm|ogg)$/)) {
+      // Se for um vídeo diretamente hospedado (mp4, webm, ogg)
+      thumbnailUrl = null; // Sem thumbnail específico para vídeos hospedados diretamente
     } else {
-      embedUrl = link;
+      // Caso a URL seja outro tipo de link, usa o link como embedUrl e deixa o thumbnail nulo
       thumbnailUrl = null;
     }
-
+  
     return { embedUrl, thumbnailUrl };
   }, []);
+  
 
   return (
     <div>
