@@ -19,7 +19,7 @@ const Sobre = ({ showFooter = true }) => {
         setAboutData({
           title: data[`title_${i18n.language}`] || data.title,
           description: data[`description_${i18n.language}`] || data.description,
-          image: data.image,
+          image_url: data.image_url,  // Certifique-se de usar o nome correto do campo
         });
         setLoading(false);
       })
@@ -62,8 +62,8 @@ const Sobre = ({ showFooter = true }) => {
           </p>
         </Col>
         <Col md={6} className="text-center">
-          {aboutData?.image && (
-            <Image src={aboutData.image} alt={aboutData.title} fluid />
+          {aboutData?.image_url && (
+            <Image src={aboutData.image_url} alt={aboutData.title} fluid />
           )}
         </Col>
       </Row>

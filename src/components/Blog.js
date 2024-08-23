@@ -9,13 +9,12 @@ const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { t, i18n } = useTranslation(); // Incluindo i18n para obter o idioma atual
+  const { t, i18n } = useTranslation();
 
-  // Função para extrair o prefixo de idioma da URL
   const getLanguagePrefix = () => {
     const path = window.location.pathname;
-    const match = path.match(/^\/([a-z]{2})\//); // Captura o primeiro segmento do caminho
-    return match ? match[1] : 'en'; // Retorna 'en' como padrão se não encontrar
+    const match = path.match(/^\/([a-z]{2})\//);
+    return match ? match[1] : 'en';
   };
 
   useEffect(() => {
@@ -27,7 +26,6 @@ const Blog = () => {
         const posts = response.data.map(post => ({
           ...post,
           title: post[`title_${i18n.language}`] || post.title,
-          excerpt: post[`excerpt_${i18n.language}`] || post.excerpt,
           content: post[`content_${i18n.language}`] || post.content,
         }));
         setBlogPosts(posts);
@@ -38,7 +36,7 @@ const Blog = () => {
         setError(t('blog.errorFetchingPosts'));
         setLoading(false);
       });
-  }, [t, i18n.language]); // Adicionando i18n.language como dependência
+  }, [t, i18n.language]);
 
   if (loading) {
     return <p>{t('blog.loading')}</p>;
@@ -59,16 +57,15 @@ const Blog = () => {
         </p>
         <Row className="d-flex align-items-stretch">
           {blogPosts.length === 0 ? (
-            <p>{t('blog.noPostsFound')}</p> 
+            <p>{t('blog.noPostsFound')}</p>
           ) : (
             blogPosts.map(post => (
               <Col md={4} className="mb-4 d-flex align-items-stretch" key={post.id}>
                 <Card className="w-100 h-100">
-                  <Card.Img variant="top" src={post.image} alt={post.title} />
+                  <Card.Img variant="top" src={post.image_url} alt={post.title} /> {/* Usando image_url */}
                   <Card.Body className="d-flex flex-column">
-                    <Card.Subtitle className="mb-2 text-muted">{post.category}</Card.Subtitle>
                     <Card.Title>{post.title}</Card.Title>
-                    <Card.Text className="flex-grow-1">{post.excerpt}</Card.Text>
+                    <Card.Text className="flex-grow-1">{post.content.slice(0, 100)}...</Card.Text> {/* Exibe uma parte do conteúdo */}
                     <Link to={`/blog/${post.id}`} className="stretched-link mt-auto">
                       {t('blog.readMore')}
                     </Link>

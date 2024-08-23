@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner, Alert, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useTranslation } from 'react-i18next'; // Importando o hook useTranslation
+import { useTranslation } from 'react-i18next';
 
 const Documentos = () => {
-  const { t } = useTranslation(); // Inicializando o hook useTranslation
+  const { t } = useTranslation();
   const [documentos, setDocumentos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ const Documentos = () => {
         setLoading(false);
       })
       .catch(error => {
-        setError(t('documents.errorLoading')); // Usando tradução para mensagens de erro
+        setError(t('documents.errorLoading'));
         setLoading(false);
       });
   }, [t]);
@@ -34,7 +34,7 @@ const Documentos = () => {
     return (
       <div className="text-center py-5">
         <Spinner animation="border" role="status">
-          <span className="sr-only">{t('documents.loading')}</span> {/* Usando tradução para o texto de carregamento */}
+          <span className="sr-only">{t('documents.loading')}</span>
         </Spinner>
       </div>
     );
@@ -45,17 +45,17 @@ const Documentos = () => {
   }
 
   if (!documentos || documentos.length === 0) {
-    return <p className="text-center">{t('documents.noDocumentsFound')}</p>; 
+    return <p className="text-center">{t('documents.noDocumentsFound')}</p>;
   }
 
   return (
     <div>
       <Container className="py-5">
         <h1 style={{ fontWeight: 'bold', fontSize: '3rem', color: '#006400', textAlign: 'center', marginBottom: '40px' }}>
-          {t('documents.title')} {/* Usando tradução para "Documentos" */}
+          {t('documents.title')}
         </h1>
         <p style={{ fontWeight: '500', fontSize: '1.5rem', color: '#555', textAlign: 'center', marginBottom: '40px' }}>
-          {t('documents.subtitle')} {/* Usando tradução para o subtítulo */}
+          {t('documents.subtitle')}
         </p>
         <ul style={{ listStyleType: 'none', padding: 0 }}>
           {documentos.map(documento => (
@@ -63,22 +63,22 @@ const Documentos = () => {
               <Row>
                 <Col md={8}>
                   <h5 style={{ fontWeight: 'bold', color: '#006400', marginBottom: '10px' }}>
-                    {documento.title || t('documents.noTitleAvailable')} {/* Usando tradução para "Título não disponível" */}
+                    {documento.title || t('documents.noTitleAvailable')}
                   </h5>
                   <p style={{ marginBottom: '15px', color: '#555' }}>
-                    {documento.description || t('documents.noDescriptionAvailable')} {/* Usando tradução para "Descrição não disponível" */}
+                    {documento.description || t('documents.noDescriptionAvailable')}
                   </p>
                 </Col>
-                <Col md={4} className="text-md-right">
+                <Col md={4} className="text-md-right text-center">
                   <Button 
-                    href={documento.file} 
+                    href={documento.file_url}  // Ajustado para usar file_url
                     variant="success" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     download
                     style={{ padding: '10px 20px', fontWeight: 'bold' }}
                   >
-                    {t('documents.downloadButton')} {/* Usando tradução para "Baixar Documento" */}
+                    {t('documents.downloadButton')}
                   </Button>
                 </Col>
               </Row>

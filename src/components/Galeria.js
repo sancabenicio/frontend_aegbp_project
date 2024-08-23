@@ -39,21 +39,21 @@ const Galeria = ({ items, type }) => {
     setSelectedItem(item);
     setShow(true);
     openFullscreen();
-  }, [openFullscreen]); // Adicionando a dependência 'openFullscreen'
+  }, [openFullscreen]);
 
   const handleClose = useCallback(() => {
     if (document.fullscreenElement) {
       exitFullscreen();
     }
     setShow(false);
-  }, [exitFullscreen]); // Adicionando a dependência 'exitFullscreen'
+  }, [exitFullscreen]);
 
   const extractVideoDetails = useCallback((item) => {
-    const { link, file } = item;
+    const { video_url, link } = item;
     let embedUrl, thumbnailUrl;
 
-    if (file) {
-      embedUrl = file;
+    if (video_url) {
+      embedUrl = video_url;
       thumbnailUrl = null;
     } else if (link && (link.includes('youtube.com') || link.includes('youtu.be'))) {
       const youtubeRegex = /(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -83,7 +83,7 @@ const Galeria = ({ items, type }) => {
       <div className="gallery-container">
         {items && Array.isArray(items) && items.length > 0 ? (
           items.map((item, index) => {
-            const { embedUrl, thumbnailUrl } = extractVideoDetails(item);
+            const { embedUrl, thumbnailUrl } = type === 'video' ? extractVideoDetails(item) : {};
 
             return (
               <div
@@ -114,7 +114,7 @@ const Galeria = ({ items, type }) => {
                 ) : (
                   <>
                     <img 
-                      src={item.image} 
+                      src={item.image_url}  // Ajustando para o nome correto
                       alt={item.caption} 
                       className="gallery-image" 
                     />
@@ -161,7 +161,7 @@ const Galeria = ({ items, type }) => {
               )
             ) : (
               <img
-                src={selectedItem?.image}
+                src={selectedItem?.image_url}  // Ajustando para o nome correto
                 alt={selectedItem?.caption}
                 style={{ maxWidth: '100%', maxHeight: '100vh' }}
               />
