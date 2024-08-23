@@ -53,21 +53,24 @@ const Galeria = ({ items, type }) => {
     let embedUrl, thumbnailUrl;
 
     if (video_url) {
-      embedUrl = video_url;
+      embedUrl = video_url; // Cloudinary video URL
       thumbnailUrl = null;
     } else if (link && (link.includes('youtube.com') || link.includes('youtu.be'))) {
+      // Convert YouTube URL to embed format
       const youtubeRegex = /(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
       const matches = link.match(youtubeRegex);
       const videoId = matches ? matches[1] : null;
-      embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      embedUrl = `https://www.youtube.com/embed/${videoId}`; // Use the embed URL
       thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
     } else if (link && link.includes('vimeo.com')) {
+      // Handle Vimeo embed
       const vimeoRegex = /vimeo\.com\/(\d+)/;
       const matches = link.match(vimeoRegex);
       const videoId = matches ? matches[1] : null;
       embedUrl = `https://player.vimeo.com/video/${videoId}`;
       thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`;
     } else if (link && link.match(/\.(mp4|webm|ogg)$/)) {
+      // Handle direct video links
       embedUrl = link;
       thumbnailUrl = null;
     } else {
@@ -114,7 +117,7 @@ const Galeria = ({ items, type }) => {
                 ) : (
                   <>
                     <img 
-                      src={item.image_url}  // Ajustando para o nome correto
+                      src={item.image_url} 
                       alt={item.caption} 
                       className="gallery-image" 
                     />
@@ -161,7 +164,7 @@ const Galeria = ({ items, type }) => {
               )
             ) : (
               <img
-                src={selectedItem?.image_url}  // Ajustando para o nome correto
+                src={selectedItem?.image_url}
                 alt={selectedItem?.caption}
                 style={{ maxWidth: '100%', maxHeight: '100vh' }}
               />

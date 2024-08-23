@@ -48,6 +48,15 @@ const Documentos = () => {
     return <p className="text-center">{t('documents.noDocumentsFound')}</p>;
   }
 
+  const handleDownload = (url) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', ''); // O navegador tentará baixar o arquivo
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link); // Remove o elemento após o clique
+  };
+
   return (
     <div>
       <Container className="py-5">
@@ -71,11 +80,8 @@ const Documentos = () => {
                 </Col>
                 <Col md={4} className="text-md-right text-center">
                   <Button 
-                    href={documento.file_url}  // Ajustado para usar file_url
+                    onClick={() => handleDownload(documento.file_url)}  // Usando a função handleDownload
                     variant="success" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    download
                     style={{ padding: '10px 20px', fontWeight: 'bold' }}
                   >
                     {t('documents.downloadButton')}
