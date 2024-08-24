@@ -48,14 +48,10 @@ const Documentos = () => {
     return <p className="text-center">{t('documents.noDocumentsFound')}</p>;
   }
 
-  const handleDownloadAndOpen = (url) => {
-    // Abrir em uma nova aba
-    window.open(url, '_blank');
-
-    // Forçar o download
+  const handleDownload = (url) => {
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', ''); // Força o navegador a baixar o arquivo
+    link.setAttribute('download', ''); // O navegador tentará baixar o arquivo
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link); // Remove o elemento após o clique
@@ -84,11 +80,11 @@ const Documentos = () => {
                 </Col>
                 <Col md={4} className="text-md-right text-center">
                   <Button 
-                    onClick={() => handleDownloadAndOpen(documento.file_url)}  // Função para forçar download e abrir numa nova aba
+                    onClick={() => handleDownload(documento.file_url)}  // Usando a função handleDownload
                     variant="success" 
                     style={{ padding: '10px 20px', fontWeight: 'bold' }}
                   >
-                    {t('documents.downloadAndOpenButton')}
+                    {t('documents.downloadButton')}
                   </Button>
                 </Col>
               </Row>
@@ -98,6 +94,6 @@ const Documentos = () => {
       </Container>
     </div>
   );
-};
+}
 
 export default Documentos;
