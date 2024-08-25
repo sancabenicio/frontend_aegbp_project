@@ -49,12 +49,7 @@ const Documentos = () => {
   }
 
   const handleDownload = (url) => {
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', ''); // O navegador tentará baixar o arquivo
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link); // Remove o elemento após o clique
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
