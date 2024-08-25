@@ -130,7 +130,7 @@ const BlogPost = () => {
     <div>
       <Container className="py-5 blog-post-container">
         <Card className="shadow-sm">
-          <Card.Img variant="top" src={post.image} alt={post.title} className="blog-post-image" />
+          <Card.Img variant="top" src={post.image_url} alt={post.title} className="blog-post-image" />
           <Card.Body>
             <Card.Title className="text-center blog-post-title">{post.title}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted text-center blog-post-author_name">
